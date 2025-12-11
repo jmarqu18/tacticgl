@@ -5,3 +5,4 @@ export * from './types/index';
 export * from './renderer/index';
 export * from './engine/index';
 export * from './scales/index';
+export * from './data/index';

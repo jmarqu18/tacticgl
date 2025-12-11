@@ -1,4 +1,5 @@
 import type { Position2D } from './geometry.types';
+export type { Position2D };
 
 /**
  * Tipos de eventos soportados en TacticGL
