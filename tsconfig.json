@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
@@ -18,11 +22,29 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@tacticgl/core": ["./packages/core/src"],
-      "@tacticgl/charts": ["./packages/charts/src"],
-      "@tacticgl/adapters": ["./packages/adapters/src"],
-      "@tacticgl/shared": ["./packages/shared/src"]
+      "@tacticgl/core": [
+        "./packages/core/src"
+      ],
+      "@tacticgl/charts": [
+        "./packages/charts/src"
+      ],
+      "@tacticgl/adapters": [
+        "./packages/adapters/src"
+      ],
+      "@tacticgl/shared": [
+        "./packages/shared/src"
+      ]
     }
   },
-  "exclude": ["node_modules", "dist", "coverage"]
+  "include": [
+    "packages/*/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "**/tests",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
 }
