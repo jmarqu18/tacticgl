@@ -6,3 +6,4 @@
  */
 
 export { BaseRenderer } from './BaseRenderer';
+export { SVGRenderer } from './SVGRenderer';
