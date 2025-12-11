@@ -1,13 +1,11 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { RenderEngine, RendererNotSupportedError } from '../RenderEngine';
 import { SVGRenderer } from '../../renderer/SVGRenderer';
 import * as capabilities from '../capabilities';
 
 describe('RenderEngine', () => {
     // Guardamos las implementaciones originales
-    const originalIsWebGLSupported = capabilities.isWebGLSupported;
-    const originalIsCanvasSupported = capabilities.isCanvasSupported;
-    const originalIsSVGSupported = capabilities.isSVGSupported;
+
 
     afterEach(() => {
         // Restaurar mocks después de cada test

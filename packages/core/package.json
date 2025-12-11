@@ -8,9 +8,9 @@
       "require": "./dist/index.cjs"
     },
     "./types": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.js",
-      "require": "./dist/types/index.cjs",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/types/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -22,7 +22,9 @@
   ],
   "scripts": {
     "build": "vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@tacticgl/shared": "workspace:*"

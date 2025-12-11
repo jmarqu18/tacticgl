@@ -20,11 +20,11 @@ class TestRenderer extends BaseRenderer {
     public updateCalled = false;
     public createRenderContextCalled = false;
 
-    render(data: NormalizedData, options?: RenderOptions): void {
+    render(_data: NormalizedData, _options?: RenderOptions): void {
         this.renderCalled = true;
     }
 
-    update(data: Partial<NormalizedData>, transition?: TransitionConfig): void {
+    update(_data: Partial<NormalizedData>, _transition?: TransitionConfig): void {
         this.updateCalled = true;
     }
 
@@ -285,8 +285,8 @@ describe('BaseRenderer', () => {
         });
 
         it('should clear all layers', () => {
-            const layer1 = renderer.addLayer('layer1', 1);
-            const layer2 = renderer.addLayer('layer2', 2);
+            renderer.addLayer('layer1', 1);
+            renderer.addLayer('layer2', 2);
 
             // Añadir contenido
             const el1 = document.getElementById('layer-layer1');
@@ -555,8 +555,9 @@ describe('BaseRenderer', () => {
             expect(renderer.isInitialized).toBe(true);
 
             // Add layers
-            const layer1 = renderer.addLayer('events', 10);
-            const layer2 = renderer.addLayer('heatmap', 5);
+            // Add layers
+            renderer.addLayer('events', 10);
+            renderer.addLayer('heatmap', 5);
             expect(renderer.getLayers()).toHaveLength(2);
 
             // Render
@@ -596,10 +597,11 @@ describe('BaseRenderer', () => {
             renderer.init(container, {});
 
             // Añadir múltiples capas
-            const layer1 = renderer.addLayer('background', 0);
-            const layer2 = renderer.addLayer('field', 5);
-            const layer3 = renderer.addLayer('events', 10);
-            const layer4 = renderer.addLayer('overlay', 15);
+            // Añadir múltiples capas
+            renderer.addLayer('background', 0);
+            renderer.addLayer('field', 5);
+            renderer.addLayer('events', 10);
+            renderer.addLayer('overlay', 15);
 
             // Verificar orden
             const layers = renderer.getLayers();
