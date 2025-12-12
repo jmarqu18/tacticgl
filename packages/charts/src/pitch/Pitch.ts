@@ -205,9 +205,10 @@ export class Pitch {
         this.render();
     }
 
-    public add(visualization: Visualization): void {
+    public add(visualization: Visualization): this {
         this.visualizations.set(visualization.id, visualization);
         visualization.render(this.renderer, this.scale);
+        return this;
     }
 
     public getVisualization(id: string): Visualization | undefined {
