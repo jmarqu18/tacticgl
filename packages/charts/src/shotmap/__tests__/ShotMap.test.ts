@@ -192,6 +192,9 @@ describe('ShotMap', () => {
 
     describe('tooltip', () => {
         it('should show tooltip on hover', async () => {
+            // Force static position to test simple logic in ShotMap (line 174 coverage)
+            container.style.position = 'static';
+
             shotMap = new ShotMap({ data: mockShots, tooltip: true });
             pitch.add(shotMap);
 
@@ -206,6 +209,9 @@ describe('ShotMap', () => {
                 const tooltip = container.querySelector('.tacticgl-tooltip') as HTMLElement;
                 expect(tooltip).not.toBeNull();
                 expect(tooltip.style.display).toBe('block');
+
+                // Verify it ensured relative position
+                expect(container.style.position).toBe('relative');
             });
         });
 
@@ -239,6 +245,32 @@ describe('ShotMap', () => {
             await vi.waitFor(() => {
                 const tooltip = container.querySelector('.tacticgl-tooltip') as HTMLElement;
                 expect(tooltip.style.display).toBe('none');
+            });
+        });
+
+        it('should update position on mouse move', async () => {
+            shotMap = new ShotMap({ data: mockShots, tooltip: true });
+            pitch.add(shotMap);
+
+            const circle = container.querySelector('[data-shot-id="1"]');
+            if (!circle) throw new Error('Circle not found');
+
+            // Trigger show
+            circle.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+
+            // Trigger move
+            const moveEvent = new MouseEvent('mousemove', {
+                bubbles: true,
+                clientX: 100,
+                clientY: 100
+            });
+            container.dispatchEvent(moveEvent);
+
+            await vi.waitFor(() => {
+                const tooltip = container.querySelector('.tacticgl-tooltip') as HTMLElement;
+                // Logic: clientX (100) - rect.left (0) + 10 = 110
+                expect(tooltip.style.left).toBe('110px');
+                expect(tooltip.style.top).toBe('110px');
             });
         });
     });

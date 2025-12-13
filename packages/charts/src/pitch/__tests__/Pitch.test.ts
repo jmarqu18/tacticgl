@@ -189,6 +189,13 @@ describe('Pitch', () => {
 
             expect(y1).toBe(y2); // Horizontal line check
         });
+
+        it('should do nothing if orientation is same', () => {
+            const spy = vi.spyOn(pitch, 'render');
+            pitch.setOrientation('horizontal'); // Already horizontal default
+            expect(spy).not.toHaveBeenCalled();
+            spy.mockRestore();
+        });
     });
 
     describe('add()', () => {

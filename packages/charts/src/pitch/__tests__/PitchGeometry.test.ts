@@ -189,5 +189,34 @@ describe('PitchGeometry', () => {
             expect(bottomArea.height).toBeDefined();
             expect((bottomArea.y!) + (bottomArea.height!)).toBeCloseTo(100, 1);
         });
+
+        it('should transform penalty arc to vertical', () => {
+            const arc = verticalGeometry.getPenaltyArc('left');
+            // In horizontal: Left Arc is at x ~ 11.
+            // In vertical: Left became Top.
+            // Center should be flipped. cx -> cy, cy -> cx.
+            // Horizontal cx ~ 11, cy ~ 50.
+            // Vertical cx ~ 50, cy ~ 11.
+
+            expect(arc.type).toBe('arc');
+            expect(arc.type).toBe('arc');
+            // expect(arc.cx).toBeLessThan(arc.cy || 100); // cx=50, cy=10.48 - this was wrong
+            expect(arc.cx).toBeCloseTo(50, 1);
+            expect(arc.cx).toBeCloseTo(50, 1);
+            expect(arc.cy).toBeCloseTo(10.48, 1);
+
+            // Angles should be rotated by 90 deg (PI/2)
+            // Horizontal Left Arc: -angle to +angle (around 0)
+            // Vertical Top Arc: Should open downwards?
+            // "Left" penalty area is at Top (y=0). Spot is at y=11.
+            // Arc should be below spot, opening downwards (towards y=100).
+            // Angle 0 is Right. PI/2 is Down.
+            // So we expect angles around PI/2.
+            // Original: -alpha to +alpha.
+            // New: -alpha + PI/2 to alpha + PI/2.
+            // i.e. PI/2 - alpha to PI/2 + alpha.
+            // This centers around PI/2 (Down). Correct.
+            expect(arc.startAngle).toBeCloseTo(Math.PI / 2 - 0.92, 1); // Approx check, just ensure it's not 0
+        });
     });
 });
