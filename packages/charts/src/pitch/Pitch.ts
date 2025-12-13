@@ -10,6 +10,20 @@ export interface Visualization {
     destroy?(): void;
 }
 
+/**
+ * Componente principal para renderizar un campo de fútbol interactivo.
+ * Maneja la geometría, el renderizado SVG y la orquestación de capas de visualización.
+ * 
+ * @example
+ * ```typescript
+ * const pitch = new Pitch({
+ *   container: '#pitch',
+ *   theme: DARK_THEME,
+ *   orientation: 'vertical'
+ * });
+ * pitch.render();
+ * ```
+ */
 export class Pitch {
     public config: PitchConfig;
     public scale: PitchScale;

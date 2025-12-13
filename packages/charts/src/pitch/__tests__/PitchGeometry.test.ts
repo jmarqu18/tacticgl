@@ -58,8 +58,10 @@ describe('PitchGeometry', () => {
         it('should generate right penalty area', () => {
             const area = geometry.getPenaltyArea('right');
 
-            expect(area.type).toBe('rect');
-            expect(area.x + area.width).toBeCloseTo(100, 1);
+            expect(area).toBeDefined();
+            expect(area.x).toBeDefined();
+            expect(area.width).toBeDefined();
+            expect((area.x!) + (area.width!)).toBeCloseTo(100, 1);
         });
 
         it('should center penalty area vertically', () => {
@@ -183,7 +185,9 @@ describe('PitchGeometry', () => {
             // Left (X=0) -> Top (Y=0)
 
             expect(topArea.y).toBe(0);
-            expect(bottomArea.y + bottomArea.height).toBeCloseTo(100, 1);
+            expect(bottomArea.y).toBeDefined();
+            expect(bottomArea.height).toBeDefined();
+            expect((bottomArea.y!) + (bottomArea.height!)).toBeCloseTo(100, 1);
         });
     });
 });

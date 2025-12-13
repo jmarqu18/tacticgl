@@ -8,6 +8,11 @@ export interface ShotMapOptions extends Partial<ShotMapConfig> {
     tooltip?: boolean;
 }
 
+/**
+ * Visualización de mapa de tiros (Shot Map).
+ * Renderiza los tiros como círculos con tamaño basado en xG y color basado en resultado.
+ * Incluye soporte para tooltips e interacciones (hover).
+ */
 export class ShotMap implements Visualization {
     public readonly id = 'shotmap';
     private config: ShotMapConfig;
