@@ -57,7 +57,30 @@ Puedes añadir capas de visualización al campo (como mapas de calor, mapas de t
 
 ```typescript
 // Encadenamiento soportado por createPitch
-const pitch = createPitch('#pitch')
-  .add(shotMapLayer)
-  .add(heatMapLayer);
+const pitch = createPitch('#pitch');
+
+// Añadir un ShotMap
+import { shotMap, ShotOutcome } from '@tacticgl/charts';
+
+shotMap(pitch, shotsData, {
+  filter: { teamId: 1 },
+  colors: { [ShotOutcome.Goal]: '#00ff00' }
+});
 ```
+
+## API `shotMap`
+
+Helper para añadir rápidamente una visualización de tiros.
+
+```typescript
+import { createPitch, shotMap } from '@tacticgl/charts';
+
+const pitch = createPitch('#container');
+
+// Añadir visualización y obtener la instancia
+const map = shotMap(pitch, myShots);
+
+// Interactuar con la instancia
+map.highlight('shot-1');
+map.setFilter({ playerId: 10 });
+
