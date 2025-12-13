@@ -207,8 +207,7 @@ tramp
 # Package managers
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
- Bun.lockb
+Bun.lockb
 
 # Local development
 .vercel
